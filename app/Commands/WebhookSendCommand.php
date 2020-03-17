@@ -16,7 +16,7 @@ class WebhookSendCommand extends Command
      * @var string
      */
     protected $signature = 'webhook:send
-        {webhook : Webhook URL (required)}
+        {webhook? : Webhook URL (optional if $WEBHOOK_URL set)}
         {--text= : Body text of message to send (optional)}
         {--tts : Send message with text-to-speech enabled (optional)}
         {--username= : Send message with text-to-speech enabled (optional)}
@@ -55,7 +55,11 @@ class WebhookSendCommand extends Command
      */
     public function handle()
     {
-        $this->url = $this->argument('webhook');
+        $this->url = env('WEBHOOK_URL') ?? $this->argument('webhook');
+        if ($this->url == null) {
+            $this->error("Error: You must either have the environment variable \$WEBHOOK_URL set or must pass it as parameter.");
+            exit(1);
+        }
         $webhook = new WebhookClient($this->url);
         return $this->pipeline($webhook);
     }
