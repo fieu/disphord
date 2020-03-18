@@ -18,18 +18,18 @@ tasks:
     git clone --branch master git@github.com:NurdTurd/disphord.git
     cd disphord
     composer install --no-progress
-    export WEBHOOK_URL="$(<"~/.webhook_url")"
+    export WEBHOOK_URL="$(<~/.webhook_url)"
 - test: |
     pwd
     cd disphord
-    export WEBHOOK_URL="$(<"~/.webhook_url")"
+    export WEBHOOK_URL="$(<~/.webhook_url)"
     php disphord test
 - build: |
     cd disphord
     php disphord app:build -n --build-version="$(git rev-parse --short HEAD)"
 - test-webhook: |
     cd disphord
-    export WEBHOOK_URL="$(<"~/.webhook_url")"
+    export WEBHOOK_URL="$(<~/.webhook_url)"
     ./builds/disphord webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269

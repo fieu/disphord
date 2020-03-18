@@ -1,13 +1,13 @@
 {
-    "name": "nurdturd/discord.php",
+    "name": "nurdturd/disphord",
     "description": "PHP port of discord.sh",
     "keywords": ["discord", "laravel", "console", "cli"],
-    "homepage": "https://suce.dev/discord-php",
+    "homepage": "https://suce.dev/disphord",
     "type": "project",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/NurdTurd/discord.php/issues",
-        "source": "https://github.com/NurdTurd/discord.php"
+        "issues": "https://github.com/NurdTurd/disphord/issues",
+        "source": "https://github.com/NurdTurd/disphord"
     },
     "authors": [
         {
