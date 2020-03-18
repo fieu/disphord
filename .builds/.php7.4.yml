@@ -20,16 +20,19 @@ tasks:
     cd disphord
     composer install --no-progress
 - test: |
-    pwd
     cd disphord
+    set +x
     export WEBHOOK_URL="$(<~/.webhook_url)"
+    set -x
     php disphord test
 - build: |
     cd disphord
     php disphord app:build -n --build-version="$(git rev-parse --short HEAD)"
 - test-webhook: |
     cd disphord
+    set +x
     export WEBHOOK_URL="$(<~/.webhook_url)"
+    set -x
     ./builds/disphord webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
