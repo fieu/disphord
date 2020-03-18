@@ -1,6 +1,6 @@
 image: debian/buster
 artifacts:
-  - /home/build/discord.php/builds/discord-php
+  - /home/build/disphord/builds/discord-php
 tasks:
 - setup: |
     sudo apt-get update -y > /dev/null
@@ -14,18 +14,18 @@ tasks:
     sudo apt-get autoremove -y > /dev/null
     sudo apt-get upgrade -y > /dev/null
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
-    cd discord.php
+    cd disphord
     composer install --no-progress
     export WEBHOOK_URL="$(cat ~/.webhook_url)"
 - test: |
-    cd discord.php
+    cd disphord
     echo $WEBHOOK_URL
     php discord-php test
 - build: |
-    cd discord.php
+    cd disphord
     php discord-php app:build -n --build-version="$(git rev-parse --short HEAD)"
 - test-webhook: |
-    cd discord.php
+    cd disphord
     ./builds/discord-php webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
