@@ -4,14 +4,17 @@ packages:
     - lsb-release
     - apt-transport-https
     - ca-certificates
+    - zip
+    - unzip
 tasks:
 - setup: |
     sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
     sudo apt update
     sudo apt purge -y apache2
-    sudo apt install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl}
+    sudo apt install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl,xml}
     sudo apt autoremove -y
+    sudo apt upgrade -y
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
     cd discord.php
