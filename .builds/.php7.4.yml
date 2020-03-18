@@ -12,11 +12,11 @@ tasks:
 - setup: |
     sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-    sudo apt update
-    sudo apt purge -y apache2
-    sudo apt install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl,xml}
-    sudo apt autoremove -y
-    sudo apt upgrade -y
+    sudo apt-get update > /dev/null
+    sudo apt-get purge -y apache2 > /dev/null
+    sudo apt-get install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl,xml} > /dev/null
+    sudo apt-get autoremove -y > /dev/null
+    sudo apt-get upgrade -y > /dev/null
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
     cd discord.php
     composer install --no-progress
@@ -28,6 +28,9 @@ tasks:
 - build: |
     cd discord.php
     php discord-php app:build -n --build-version="$(git rev-parse --short HEAD)"
+- test-webhook:
+    cd discord.php
+    ./build/discord-php webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 12bc9b7b-ecfb-4633-95ed-af83de742135
