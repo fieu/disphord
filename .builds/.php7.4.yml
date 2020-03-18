@@ -28,9 +28,9 @@ tasks:
 - build: |
     cd discord.php
     php discord-php app:build -n --build-version="$(git rev-parse --short HEAD)"
-- test-webhook:
+- test-webhook: |
     cd discord.php
-    ./build/discord-php webhook:send --text "Test Text"
+    ./builds/discord-php webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 12bc9b7b-ecfb-4633-95ed-af83de742135
