@@ -32,7 +32,7 @@ tasks:
     set +x
     export WEBHOOK_URL="$(<~/.webhook_url)"
     set -x
-    ./builds/disphord webhook:send --text "Test Text"
+    ./builds/disphord webhook:send --text "Test Text" && complete-build
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 4e9e3aff-bb8d-4581-891d-9f503bddcad0
