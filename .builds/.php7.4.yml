@@ -3,6 +3,7 @@ artifacts:
   - /home/build/disphord/builds/discord-php
 tasks:
 - setup: |
+    set +x
     sudo apt-get update -y > /dev/null
     sudo apt-get upgrade -y > /dev/null
     sudo apt-get install -y wget lsb-release apt-transport-https ca-certificates zip unzip > /dev/null
@@ -15,10 +16,9 @@ tasks:
     sudo apt-get upgrade -y > /dev/null
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
     ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-    git clone --branch master git@github.com:NurdTurd/disphord.git
+    git clone -q --branch master git@github.com:NurdTurd/disphord.git
     cd disphord
     composer install --no-progress
-    export WEBHOOK_URL="$(<~/.webhook_url)"
 - test: |
     pwd
     cd disphord
