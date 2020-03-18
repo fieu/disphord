@@ -4,15 +4,14 @@ packages:
     - lsb-release
     - apt-transport-https
     - ca-certificates
-    - sudo
 tasks:
 - setup: |
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+    sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-    apt update
-    apt purge -y apache2
-    apt install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl}
-    apt autoremove -y
+    sudo apt update
+    sudo apt purge -y apache2
+    sudo apt install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl}
+    sudo apt autoremove -y
     export WEBHOOK_URL="$(cat ~/.webhook_url)"
 - test: |
     cd discord.php
