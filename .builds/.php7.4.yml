@@ -25,7 +25,7 @@ tasks:
     php discord-php test
 - build: |
     cd discord.php
-    php discord-php app:build -n --build-version=$(git rev-parse --short HEAD)
+    php discord-php app:build -n --build-version="$(git rev-parse --short HEAD)"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 12bc9b7b-ecfb-4633-95ed-af83de742135
