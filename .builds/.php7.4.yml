@@ -1,4 +1,6 @@
 image: debian/buster
+artifacts:
+  - /home/build/discord.php/builds/discord-php
 packages:
     - wget
     - lsb-release
