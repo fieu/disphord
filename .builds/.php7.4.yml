@@ -3,7 +3,6 @@ artifacts:
   - /home/build/disphord/builds/discord-php
 tasks:
 - setup: |
-    set +x
     sudo apt-get update -y > /dev/null
     sudo apt-get upgrade -y > /dev/null
     sudo apt-get install -y wget lsb-release apt-transport-https ca-certificates zip unzip > /dev/null
@@ -33,6 +32,7 @@ tasks:
     set +x
     export WEBHOOK_URL="$(<~/.webhook_url)"
     set -x
+    set +e
     ./builds/disphord webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
