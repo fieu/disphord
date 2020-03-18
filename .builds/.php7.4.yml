@@ -19,13 +19,13 @@ tasks:
     export WEBHOOK_URL="$(cat ~/.webhook_url)"
 - test: |
     cd disphord
-    php discord-php test
+    php disphord test
 - build: |
     cd disphord
-    php discord-php app:build -n --build-version="$(git rev-parse --short HEAD)"
+    php disphord app:build -n --build-version="$(git rev-parse --short HEAD)"
 - test-webhook: |
     cd disphord
-    ./builds/discord-php webhook:send --text "Test Text"
+    ./builds/disphord webhook:send --text "Test Text"
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 4e9e3aff-bb8d-4581-891d-9f503bddcad0
