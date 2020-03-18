@@ -12,6 +12,10 @@ tasks:
     sudo apt purge -y apache2
     sudo apt install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl}
     sudo apt autoremove -y
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
+    cd discord.php
+    composer install
     export WEBHOOK_URL="$(cat ~/.webhook_url)"
 - test: |
     cd discord.php
