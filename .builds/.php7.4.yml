@@ -1,15 +1,11 @@
 image: debian/buster
 artifacts:
   - /home/build/discord.php/builds/discord-php
-packages:
-    - wget
-    - lsb-release
-    - apt-transport-https
-    - ca-certificates
-    - zip
-    - unzip
 tasks:
 - setup: |
+    sudo apt-get update -y > /dev/null
+    sudo apt-get upgrade -y > /dev/null
+    sudo apt-get install -y wget lsb-release apt-transport-https ca-certificates zip unzip > /dev/null
     sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
     sudo apt-get update > /dev/null
