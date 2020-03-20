@@ -26,7 +26,7 @@ tasks:
     php disphord test
 - build: |
     cd disphord
-    php disphord app:build -n --build-version="$(git rev-parse --short HEAD)"
+    php disphord app:build --no-ansi -n --build-version="$(git rev-parse --short HEAD)"
 - test-webhook: |
     cd disphord
     set +x
