@@ -22,6 +22,7 @@ class WebhookSendCommand extends Command
         {--username= : Send message with text-to-speech enabled (optional)}
         {--avatar= : Set avatar to image via URL (optional)}
         {--title= : Set embed title (optional)}
+        {--title-url= : Set embed title URL (optional)}
         {--description= : Set embed description (optional)}
         {--color= : Set embed color (hex/decimal color) (optional)}
         {--thumbnail= : Set thumbnail to image located via URL (optional)}
@@ -33,7 +34,7 @@ class WebhookSendCommand extends Command
         {--footer-icon= : Set footer icon (optional)}
         {--field=* : Set field (optional)}
         {--timestamp : Set current time in footer (optional)}';
-        
+
     /**
      * The description of the command.
      *
@@ -180,9 +181,9 @@ class WebhookSendCommand extends Command
             $webhook->avatar($this->option('avatar'));
         }
         if ($this->option('tts')) $webhook->tts(true);
-    
+
         $this->isValidWebhook();
-    
+
         try {
             $webhook->send();
             $this->info("Successfully sent webhook!");
