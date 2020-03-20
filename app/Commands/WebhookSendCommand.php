@@ -2,10 +2,10 @@
 
 namespace App\Commands;
 
+use Illuminate\Support\Facades\Http;
+use DiscordWebhooks\Embed as DiscordEmbed;
 use LaravelZero\Framework\Commands\Command;
 use DiscordWebhooks\Client as WebhookClient;
-use DiscordWebhooks\Embed as DiscordEmbed;
-use Illuminate\Support\Facades\Http;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class WebhookSendCommand extends Command
@@ -42,11 +42,11 @@ class WebhookSendCommand extends Command
      */
     protected $description = 'Send a Discord webhook (message or embed)';
 
-     /**
-     * Set webhook URL
-     *
-     * @var string
-     */
+    /**
+    * Set webhook URL
+    *
+    * @var string
+    */
     protected $url;
 
     /**
@@ -93,7 +93,7 @@ class WebhookSendCommand extends Command
                 $this->error('Error: The title must be 256 characters maximum.');
                 exit(1);
             } else {
-                $embed->title($this->option('title'));
+                $embed->title($this->option('title'), $this->option('title-url') ?? '');
             }
             if (strlen($this->option('description')) > 2048) {
                 $this->error('Error: The description must be 2048 characters maximum.');
@@ -132,7 +132,9 @@ class WebhookSendCommand extends Command
                     $embed->field($ex[0], $ex[1], $ex[2]);
                 }
             }
-            if ($this->option('color')) $embed->color($this->isValidColor());
+            if ($this->option('color')) {
+                $embed->color($this->isValidColor());
+            }
             if ($this->option('thumbnail') && !$this->isValidImage($this->option('thumbnail'))) {
                 $this->error("Error: The URL of your thumbnail is invalid. Make sure it is a direct URL");
                 exit(1);
@@ -157,7 +159,9 @@ class WebhookSendCommand extends Command
             } else {
                 $embed->footer($this->option('footer'), $this->option('footer-icon') ?? '');
             }
-            if ($this->option('timestamp')) $embed->timestamp(date("c"));
+            if ($this->option('timestamp')) {
+                $embed->timestamp(date("c"));
+            }
 
 
             $webhook->embed($embed);
@@ -180,7 +184,9 @@ class WebhookSendCommand extends Command
         } else {
             $webhook->avatar($this->option('avatar'));
         }
-        if ($this->option('tts')) $webhook->tts(true);
+        if ($this->option('tts')) {
+            $webhook->tts(true);
+        }
 
         $this->isValidWebhook();
 
@@ -219,8 +225,9 @@ class WebhookSendCommand extends Command
      */
     private function isValidColor(): int
     {
-        if (!$this->option('color'))
+        if (!$this->option('color')) {
             return (null);
+        }
         try {
             $color = $this->option('color');
             (new DiscordEmbed)->color($color);
