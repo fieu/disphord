@@ -29,7 +29,7 @@ tasks:
     cd disphord
     set +x
     export WEBHOOK_URL="$(<~/.webhook_url)"
-    for file in ./.builds/tests/*.sh; do echo "Executing $(basename $file)..." && command "$file"; done
+    ./.builds/run-test.sh
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 4e9e3aff-bb8d-4581-891d-9f503bddcad0
