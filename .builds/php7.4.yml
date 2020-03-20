@@ -14,8 +14,6 @@ tasks:
     sudo apt-get autoremove -y > /dev/null
     sudo apt-get upgrade -y > /dev/null
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
-    ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-    git clone -q --branch master git@github.com:NurdTurd/disphord.git
     cd disphord
     composer install --no-progress
 - test: |
