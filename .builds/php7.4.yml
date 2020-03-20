@@ -15,6 +15,7 @@ tasks:
     sudo apt-get upgrade -y > /dev/null
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
     cd disphord
+    composer global require hirak/prestissimo
     composer install --no-progress
 - test: |
     cd disphord
