@@ -2,7 +2,7 @@
 set -x
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-$DIR/../../builds/disphord webhook:send \
+$DIR/../../builds/disphord webhook:send -vvv \
     --username "$(php -r 'echo "PHP " . phpversion();')" \
     --title "Title" \
     --title-url "https://github.com/NurdTurd/disphord" \
@@ -19,5 +19,5 @@ $DIR/../../builds/disphord webhook:send \
     --field "Field 1, Field 1 Value" \
     --field "Field 2, Field 2 Value, false" \
     --field "Field 3, Field 3 Value, true" \
-    --field "Field 4, Field 4 Value, true"
+    --field "Field 4, Field 4 Value, true" \
 
