@@ -1,2 +1,2 @@
 # discord.php
-PHP port of discord.sh
+PHP port of discord.sh!
