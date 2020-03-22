@@ -10,12 +10,10 @@ tasks:
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
     sudo apt-get update > /dev/null
     sudo apt-get purge -y apache2 > /dev/null
-    sudo apt-get install -y php7.4 php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl,xml} > /dev/null
+    sudo apt-get install -y php7.3 php7.3-{bcmath,bz2,intl,gd,mbstring,mysql,zip,curl,xml} > /dev/null
     sudo apt-get autoremove -y > /dev/null
     sudo apt-get upgrade -y > /dev/null
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | sudo php -- --install-dir=/usr/local/bin --filename=composer
-    ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-    git clone -q --branch master git@github.com:NurdTurd/disphord.git
     cd disphord
     composer install --no-progress
 - test: |
@@ -26,13 +24,13 @@ tasks:
     php disphord test
 - build: |
     cd disphord
-    php disphord app:build -n --build-version="$(git rev-parse --short HEAD)"
+    php disphord app:build --no-ansi -n --build-version="$(git rev-parse --short HEAD)"
 - test-webhook: |
     cd disphord
     set +x
     export WEBHOOK_URL="$(<~/.webhook_url)"
     set -x
-    ./builds/disphord webhook:send --text "Test Text"
+    ./.builds/run-tests.sh
 secrets:
     - 21f12a6c-9035-47bc-a610-36e93c413269
     - 4e9e3aff-bb8d-4581-891d-9f503bddcad0

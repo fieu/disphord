@@ -1,7 +1,7 @@
 {
     "name": "nurdturd/disphord",
     "description": "PHP port of discord.sh",
-    "keywords": ["discord", "laravel", "console", "cli"],
+    "keywords": ["discord", "laravel", "console", "cli", "phar"],
     "homepage": "https://suce.dev/disphord",
     "type": "project",
     "license": "MIT",
