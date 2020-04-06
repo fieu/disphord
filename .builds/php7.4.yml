@@ -31,5 +31,5 @@ tasks:
     export WEBHOOK_URL="$(<~/.webhook_url)"
     ./.builds/run-tests.sh
 secrets:
-    - 21f12a6c-9035-47bc-a610-36e93c413269
+    - 08e8ae4c-f696-4b80-bd2f-7c46f1141539
     - 4e9e3aff-bb8d-4581-891d-9f503bddcad0
