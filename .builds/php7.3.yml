@@ -32,4 +32,4 @@ tasks:
     set -x
     ./.builds/run-tests.sh
 secrets:
-    - 08e8ae4c-f696-4b80-bd2f-7c46f1141539
+    - 0c36cc6c-acb0-4ae4-80a7-298a9c734296
