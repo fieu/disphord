@@ -37,9 +37,9 @@ jobs:
       run: ./.builds/run-tests.sh
       env:
         WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: disphord
+        path: ./builds/disphord
