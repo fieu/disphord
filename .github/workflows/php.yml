@@ -32,6 +32,11 @@ jobs:
     
     - name: Build application
       run: php disphord app:build --build-version=$(git rev-parse HEAD) --no-interaction --ansi --verbose
+    
+    - name: Test application
+      run: ./.builds/run-tests.sh
+      env:
+        WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
