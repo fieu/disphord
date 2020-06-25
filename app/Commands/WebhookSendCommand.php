@@ -43,10 +43,10 @@ class WebhookSendCommand extends Command
     protected $description = 'Send a Discord webhook (message or embed)';
 
     /**
-    * Set webhook URL
-    *
-    * @var string
-    */
+     * Set webhook URL
+     *
+     * @var string
+     */
     protected $url;
 
     /**
@@ -99,7 +99,7 @@ class WebhookSendCommand extends Command
                 $this->error('Error: The description must be 2048 characters maximum.');
                 exit(1);
             } else {
-                $embed->description($this->option('description'));
+                $embed->description(str_replace('\n', "\n", $this->option('description')));
             }
             if (count($this->option('field')) > 25) {
                 $this->error('Error: You may have 25 fields maximum.');
@@ -108,24 +108,24 @@ class WebhookSendCommand extends Command
             for ($i = 0; $i != count($this->option('field')); $i++) {
                 $ex = explode(', ', $this->option('field')[$i]);
                 if (count($ex) != 2 && count($ex) != 3) {
-                    $this->error("Error: You must pass at least 2 arguments to field #". ($i + 1));
+                    $this->error("Error: You must pass at least 2 arguments to field #" . ($i + 1));
                     $this->printFieldUsage();
                     exit(1);
                 }
                 if (!empty($ex[2])) {
                     if ($ex[2] != "true" && $ex[2] != "false") {
-                        $this->error("Error: You must pass true or false as the 3rd argument to field #". ($i + 1));
+                        $this->error("Error: You must pass true or false as the 3rd argument to field #" . ($i + 1));
                         $this->printFieldUsage();
                         exit(1);
                     }
                     $ex[2] = ($ex[2] == "true") ? true : false;
                     if (strlen($ex[0]) > 256) {
-                        $this->error("Error: Too many characters in parameter 1 of field #". ($i + 1));
+                        $this->error("Error: Too many characters in parameter 1 of field #" . ($i + 1));
                         $this->printFieldUsage();
                         exit(1);
                     }
                     if (strlen($ex[1]) > 1024) {
-                        $this->error("Error: Too many characters in parameter 2 of field #". ($i + 1));
+                        $this->error("Error: Too many characters in parameter 2 of field #" . ($i + 1));
                         $this->printFieldUsage();
                         exit(1);
                     }
@@ -294,8 +294,7 @@ class WebhookSendCommand extends Command
      */
     private function is_embed(): bool
     {
-        return (
-            $this->option('title') ||
+        return ($this->option('title') ||
             $this->option('description') ||
             $this->option('color') ||
             $this->option('thumbnail') ||
@@ -305,7 +304,6 @@ class WebhookSendCommand extends Command
             $this->option('image') ||
             $this->option('footer') ||
             $this->option('footer-icon') ||
-            $this->option('timestamp')
-        );
+            $this->option('timestamp'));
     }
 }
