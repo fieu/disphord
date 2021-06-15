@@ -1,2 +1,2 @@
-# discord.php
+# disphord
 PHP port of discord.sh!
